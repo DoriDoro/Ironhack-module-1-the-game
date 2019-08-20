@@ -1,0 +1,29 @@
+Indroduction of the game:
+
+You see a picture of an known animal on the right side. You can see the German and also the English name of this animal in the left littel box. 
+
+The task is to learn how to write the name of this animal in German during 10 seconds and remember it.
+
+After the 10 seconds you have to write the name of the animal in German in the textfield below the picture and submit your answer.
+ 
+For the special characters in German you find them in the little box next to the timer.
+
+Good luck!
+
+
+first page: introduction > clicks on the link 'Let's start' the user switch to the next page (index.html with the fox) and immediately the timer of 10 seconds will start to count down.
+after 10 seconds the page will not show the german name of the animal anymore and the user has to write the name of the animal in German into the textfield (textarea) included the article of the animal. the user has to click next to submit the entry into the textfield. 
+display the correct answer into the textfield.
+user is clicking the next button and gets to the next animal name with 12 sec and so on.
+
+
+
+the presentation:
+show the inspiration to create the game (learn effect)
+what done for the game
+what used for the game
+
+
+ä alt + 123
+ö alt + 148
+ü alt + 129

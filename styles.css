@@ -1,0 +1,82 @@
+/* --- general ---*/
+* {
+  background: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* --- index file -- classes --- */
+.container {
+  display: flex;
+}
+
+.border {
+  border: 1px solid grey;
+}
+
+.animal-name {
+  display: flex;
+  flex-direction: column;
+  width: 300px; /* extent to 550px for the last word */
+  height: 150px;
+  margin: 10px;
+  padding: 0px 20px;
+}
+
+.img-div {
+  width: 600px;
+  height: 400px;
+  display: flex;
+  background-image: url(/images/fox.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.time {
+  width: 50px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.field {
+  width: 450px;
+  height: 55px;
+  margin: 10px;
+  padding: 10px;
+  /* the size of the text is different */
+}
+
+.list {
+  margin: 10px;
+  padding: 10px;
+}
+
+/* --- index.html -- id ---*/
+#btn-sub {
+  color: white;
+  border: 1px solid green;
+  background-color: green;
+  border-radius: 2px;
+  padding: 5px;
+}
+
+/* --- introduction file -- id --- */
+
+#start-btn {
+  color: white;
+  border: 1px solid red;
+  background-color: red;
+  padding: 5px 30px;
+}
+
+/* --- introduction file -- classes --- */
+.container-introduction {
+  display: flex;
+  border: 1px solid grey;
+  width: 90%;
+  height: 500px;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  padding: 20px;
+  line-height: 1.4;
+}

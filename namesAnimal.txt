@@ -1,0 +1,26 @@
+
+words:
+
+example: 
+Fuchs			- fox
+
+
+German:
+
+Nashorn			- rhinoceros
+Eidechse		- lizard
+Schmetterling		- butterfly
+Meerschweinchen		- guenia pig
+Waschbär		- raccon
+Kängoru			- kangaroo
+Schneeleopard		- snow leopard
+Eichhörnchen		- squirrel
+Schildkröte		- turtle
+
+
+the official, longest German word is with 63 letters:
+Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz 
+- Beef labeling monitoring task transfer law 
+
+div.animal-name width 520px 
+
