@@ -2,34 +2,30 @@
 * {
   background: #fff;
   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
 }
 
-/* --- index file -- classes --- */
-.container {
+
+/* --- index file -- id ---*/
+#img-div {
+  width: 400px;
+  height: 250px;
+}
+
+/*#btn-sub {
+  color: white;
+  border: 1px solid green;
+  background-color: green;
+  border-radius: 2px;
+  padding: 5px;
+}
+*/
+
+
+/* --- index file -- classes ---*/
+.container-img {
   display: flex;
-}
-
-.border {
-  border: 1px solid grey;
-  border-radius: 3px;
-}
-
-.animal-name {
-  display: flex;
-  flex-direction: column;
-  width: 300px; /* extent to 550px for the last word */
-  height: 150px;
-  margin: 10px;
-  padding: 0px 20px;
-}
-
-.img-div {
-  width: 600px;
-  height: 400px;
-  display: flex;
-  /* background-image: url(/images/fox.jpg);
-  background-position: center;
-  background-repeat: no-repeat;*/
+  justify-content: space-evenly;
 }
 
 .time {
@@ -38,27 +34,52 @@
   padding: 10px;
 }
 
+.container-name {
+  display: flex;
+}
+
+.animal-name {
+  user-select: none;
+  display: flex;
+  width: 300px; 
+  height: 80px;
+  margin: 10px;
+  padding: 0px 20px;
+}
+
+.border {
+  border: 1px solid grey;
+  border-radius: 3px;
+}
+
 .field {
   width: 450px;
   height: 55px;
   margin: 10px;
   padding: 10px;
-  /* the size of the text is different */
-}
+  /* the size of the text is different */   
+} 
 
 .list {
   margin: 10px;
   padding: 10px;
+  width: fit-content;
 }
 
-/* --- index.html -- id ---*/
-#btn-sub {
-  color: white;
-  border: 1px solid green;
-  background-color: green;
-  border-radius: 2px;
-  padding: 5px;
+.green {
+  color: green;
+  padding-bottom: 20px;
+  margin-left: 10px;
+  font-size: 30px;
 }
+
+.red {
+  color: red;
+  padding-bottom: 20px;
+  margin-left: 10px;
+  font-size: 30px;
+}
+
 
 /* --- introduction file -- id --- */
 
@@ -73,6 +94,7 @@
 .container-introduction {
   display: flex;
   border: 1px solid grey;
+  border-radius: 5px;
   width: 90%;
   height: 500px;
   flex-direction: column;

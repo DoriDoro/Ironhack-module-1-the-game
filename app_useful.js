@@ -1,4 +1,8 @@
 
+let active = true;
+let displayNameInTextfield = false;
+
+
 /* get the elements of the introduction.html file */
 const startGame = document.getElementById("start-btn");
 
@@ -142,4 +146,23 @@ function enterGermanName(animal) {
 } // is working
 
 
+checkUmlaute(answerOfUser);
 
+/* check in the answerOfUser if there are ä, ö, ü or ae, oe, ue */
+function checkUmlaute() {
+  let answerOfUser = document.getElementById('answer').value;
+  let correctAnswer = animals[1].germanName;
+  
+  let  answerAE = answerOfUser.replace('ä', 'ae');
+  answerAE = correctAnswer.replace('ä', 'ae');
+
+  let  answerOE = answerOfUser.replace('ö', 'oe');
+  answerOE = correctAnswer.replace('ö', 'oe');
+
+  let  answerUE = answerOfUser.replace('ü', 'ue');
+  answerUE = correctAnswer.replace('ü', 'ue');
+
+ 
+  // console.log(answerOfUser, typeof answerOfUser); is a string
+  // console.log(correctAnswer, typeof correctAnswer); is a string
+} // is working but the condition is missing

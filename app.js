@@ -3,12 +3,9 @@ const timerDOM = document.getElementById("secs");
 const germanName = document.getElementById('germanName');
 const englishName = document.getElementById('englishName');
 const containerField = document.getElementById('field-container');
+const answer = document.getElementById('answer');
 const imgDiv = document.getElementById('img-div');
-
-
-
-let active = true;
-let displayNameInTextfield = false;
+var currentLevel = 0;
 
 /* array with German and English names of the animal and the pics */
 const animals = [
@@ -73,33 +70,25 @@ const animals = [
   }
 ];
 
-// the bonus is [10]
-const bonusAnimal = [
-  {
-    germanName: "das Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz",
-    englishName: "the Beef labeling monitoring task transfer law",
-    image: "./images/shocked.jpg"
-  }
-];
-
-let currentLevel = 0;
-
-/* -- this function got called and will be executed the first time -- */
-enterNames(animals[5]);
 
 /* change the layout of the page to enter the German and English name */
 function enterNames(animal) {
   germanName.innerText = `${animal.germanName}`;
   englishName.innerText = `${animal.englishName}`;
-  startTimer(timerDOM, 4);
-} // is working
+  answer.setAttribute(`disabled`, true);
+} // is 
+
 
 /* display only the English name  */
 function enterOnlyEnglishNames(animal) {
+  console.log(`only english`)
+  answer.removeAttribute(`disabled`);
   germanName.innerText = ``;
   englishName.innerText = `${animal.englishName}`;
-  startTimer(timerDOM, 4);
+  answer.focus();
+  startTimer(timerDOM, 5, checkAnswer);
 } // is working
+
 
 /* change the images */
 function changeImages(animal) {
@@ -109,60 +98,48 @@ function changeImages(animal) {
 
 /* check the written entry of the user with the textfield */
 function checkAnswer() {
-  let answerOfUser = document.getElementById('answer').value;
-  let correctAnswer = animals[3].germanName;
-  
-  /* convert answerOfUser to lowercase */
-  let userString = answerOfUser;
-  userString = userString.toLowerCase();
-  answerOfUser = userString;
-  console.log(answerOfUser);
-  //console.log(answerOfUser, typeof answerOfUser); is a string
-  //answerOfUser.toLowerCase(); // is not working
-
-  /* convert correctAnswer to lowercase */
-  let correctString = correctAnswer;
-  correctString = correctString.toLowerCase();
-  correctAnswer = correctString;
-  console.log(correctAnswer);
-
+  answer.setAttribute(`disabled`, true);
+  let answerOfUser = answer.value.toLowerCase();
+  let correctAnswer = animals[currentLevel].germanName.toLowerCase();
+  let correct = document.getElementById('correctAnswer');
+   console.log(`why`, answerOfUser, correctAnswer);
+   
   /* check if the answer and correct answer are the same */
-  if(correctAnswer === answerOfUser) {
-    console.log('yea you got that!');
-  } else console.log('sorry that is not correct');
+    if(correctAnswer === answerOfUser) {
+      
+      correct.innerHTML = `<div id="correctAnswer">${answerOfUser}, YEAH, that is correct!</div>`;
+      //addText = document.getElementById('correctAnswer');
+      correct.classList.add('green');
+    } else {
 
-  // take the germanName of the animals array
-  // take the entry of the user in the textarea id='correctAnswer' value='correctAnswer'
-  // compare the 'answer' with the 'correctAnswer'
-  // change both 'answer' and 'correctAnswer' to lowerCase()
-  
+    correct.innerHTML = `<div id="correctAnswer">${answerOfUser}, NOPE, sorry folk</div>`;
+    correct.classList.add('red');
+  }
+  currentLevel++;
+  startTimer(timerDOM, 5, startRound);
 }
-
-/* check in the answerOfUser if there are ä, ö, ü or ae, oe, ue */
-function checkUmlaut() {
-  let answerOfUser = document.getElementById('answer').value;
-  let correctAnswer = animals.germanName;
-  //document.getElementById('correctAnswer').value;
-
-
-  //   Schildkröte or schildkroete
-// replace string''
-
-// "Schildkröte".replace('ö', 'oe');
-
-}
-
-
-checkAnswer();
 
 /* display at the end how many correct answers were given of the user  */
 
-/* this function will be called inside of the layout functions */
-function startTimer(element, time) {
+/* this function will be called inside of the functions */
+
+function startRound() {
+  const currentAnimal = animals[currentLevel];
+  answer.value = ``;
+  enterNames(currentAnimal);
+  changeImages(currentAnimal);
+
+  startTimer(timerDOM, 5, function() {
+    console.log(`so far so good`)
+    enterOnlyEnglishNames(currentAnimal);
+  });
+}
+
+function startTimer(element, time, clbk) {
   const intervalId = setInterval(() => {
-    if (time <= 1) {
+    if (time === 0) {
       clearInterval(intervalId);
-      currentLevel++;      
+      clbk();
     }
     element.innerHTML = --time;
   }, 1000);
@@ -170,7 +147,6 @@ function startTimer(element, time) {
 // change the condition from time <= 0 to time <= 1
 
 
-
-
+startRound();
 
 
