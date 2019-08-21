@@ -73,6 +73,8 @@ const animals = [
 
 /* change the layout of the page to enter the German and English name */
 function enterNames(animal) {
+  // let correct = document.getElementById('correctAnswer');
+  // correct.innerHTML = ``; // is just working one round the second the the answer of the user is not detectable anymore
   germanName.innerText = `${animal.germanName}`;
   englishName.innerText = `${animal.englishName}`;
   answer.setAttribute(`disabled`, true);
@@ -81,7 +83,6 @@ function enterNames(animal) {
 
 /* display only the English name  */
 function enterOnlyEnglishNames(animal) {
-  console.log(`only english`)
   answer.removeAttribute(`disabled`);
   germanName.innerText = ``;
   englishName.innerText = `${animal.englishName}`;
@@ -99,45 +100,30 @@ function changeImages(animal) {
 /* check the written entry of the user with the textfield */
 function checkAnswer() {
   answer.setAttribute(`disabled`, true);
-  let answerOfUser = answer.value.toLowerCase();
-  let correctAnswer = animals[currentLevel].germanName.toLowerCase();
+  let answerOfUser = answer.value.toLowerCase(); // necessary to compare the answer of the user and the germanName in the array
+  let correctAnswer = animals[currentLevel].germanName.toLocaleLowerCase();
   let correct = document.getElementById('correctAnswer');
-   console.log(`why`, answerOfUser, correctAnswer);
+   // console.log(`why`, answerOfUser, correctAnswer);
    
   /* check if the answer and correct answer are the same */
     if(correctAnswer === answerOfUser) {
-      
-      correct.innerHTML = `<div id="correctAnswer">${answerOfUser}, YEAH, that is correct!</div>`;
+      correct.innerHTML = `<div id="correctAnswer">${animals[currentLevel].germanName}, YEAH, that is correct!</div>`;
       //addText = document.getElementById('correctAnswer');
       correct.classList.add('green');
     } else {
-
     correct.innerHTML = `<div id="correctAnswer">${answerOfUser}, NOPE, sorry folk</div>`;
     correct.classList.add('red');
   }
   currentLevel++;
-  startTimer(timerDOM, 5, startRound);
+  startTimer(timerDOM, 2, startRound);
 }
 
 /* display at the end how many correct answers were given of the user  */
 
-/* this function will be called inside of the functions */
-
-function startRound() {
-  const currentAnimal = animals[currentLevel];
-  answer.value = ``;
-  enterNames(currentAnimal);
-  changeImages(currentAnimal);
-
-  startTimer(timerDOM, 5, function() {
-    console.log(`so far so good`)
-    enterOnlyEnglishNames(currentAnimal);
-  });
-}
 
 function startTimer(element, time, clbk) {
   const intervalId = setInterval(() => {
-    if (time === 0) {
+    if (time === 1) {
       clearInterval(intervalId);
       clbk();
     }
@@ -147,6 +133,20 @@ function startTimer(element, time, clbk) {
 // change the condition from time <= 0 to time <= 1
 
 
+/* this is the first called function */
+function startRound() {
+  const currentAnimal = animals[currentLevel];
+  answer.value = ``;
+  enterNames(currentAnimal);
+  changeImages(currentAnimal);
+
+  startTimer(timerDOM, 10, function() {
+    // console.log(`so far so good`)
+    enterOnlyEnglishNames(currentAnimal);
+  });
+}
+
+/* call the function to start the programm */
 startRound();
 
 
