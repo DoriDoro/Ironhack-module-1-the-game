@@ -1,9 +1,14 @@
 /* get the elements of the index.html file*/
-const btnNext = document.getElementById("btn-sub");
-const secs = document.getElementById("secs");
+const timerDOM = document.getElementById("secs");
+const germanName = document.getElementById('germanName');
+const englishName = document.getElementById('englishName');
+const containerField = document.getElementById('field-container');
+const imgDiv = document.getElementById('img-div');
 
-/* get the elements of the introduction.html file */
-const startGame = document.getElementById("start-btn");
+
+
+let active = true;
+let displayNameInTextfield = false;
 
 /* array with German and English names of the animal and the pics */
 const animals = [
@@ -65,98 +70,107 @@ const animals = [
     germanName: "die Schildkröte",
     englishName: "the turtle",
     image: "./images/turtle.jpg"
-  },
+  }
+];
 
+// the bonus is [10]
+const bonusAnimal = [
   {
-    germanName:
-      "das Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz",
+    germanName: "das Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz",
     englishName: "the Beef labeling monitoring task transfer law",
     image: "./images/shocked.jpg"
   }
 ];
-// the bonus is [10]
 
 let currentLevel = 0;
 
-/* insert the correct German word out of the array to the textfield */
-function displayGermanName() {
-  const displayName = document.getElementById("field");
-  displayName.innerText = `${animals[currentLevel].germanName}`;
+/* -- this function got called and will be executed the first time -- */
+enterNames(animals[5]);
+
+/* change the layout of the page to enter the German and English name */
+function enterNames(animal) {
+  germanName.innerText = `${animal.germanName}`;
+  englishName.innerText = `${animal.englishName}`;
+  startTimer(timerDOM, 4);
+} // is working
+
+/* display only the English name  */
+function enterOnlyEnglishNames(animal) {
+  germanName.innerText = ``;
+  englishName.innerText = `${animal.englishName}`;
+  startTimer(timerDOM, 4);
+} // is working
+
+/* change the images */
+function changeImages(animal) {
+  imgDiv.querySelector("img").src = `${animal.image}`;
+} // is working
+
+
+/* check the written entry of the user with the textfield */
+function checkAnswer() {
+  let answerOfUser = document.getElementById('answer').value;
+  let correctAnswer = animals[3].germanName;
+  
+  /* convert answerOfUser to lowercase */
+  let userString = answerOfUser;
+  userString = userString.toLowerCase();
+  answerOfUser = userString;
+  console.log(answerOfUser);
+  //console.log(answerOfUser, typeof answerOfUser); is a string
+  //answerOfUser.toLowerCase(); // is not working
+
+  /* convert correctAnswer to lowercase */
+  let correctString = correctAnswer;
+  correctString = correctString.toLowerCase();
+  correctAnswer = correctString;
+  console.log(correctAnswer);
+
+  /* check if the answer and correct answer are the same */
+  if(correctAnswer === answerOfUser) {
+    console.log('yea you got that!');
+  } else console.log('sorry that is not correct');
+
+  // take the germanName of the animals array
+  // take the entry of the user in the textarea id='correctAnswer' value='correctAnswer'
+  // compare the 'answer' with the 'correctAnswer'
+  // change both 'answer' and 'correctAnswer' to lowerCase()
+  
 }
 
-createLayout(animals[currentLevel]);
+/* check in the answerOfUser if there are ä, ö, ü or ae, oe, ue */
+function checkUmlaut() {
+  let answerOfUser = document.getElementById('answer').value;
+  let correctAnswer = animals.germanName;
+  //document.getElementById('correctAnswer').value;
 
-function createLayout(animal) {
-  const main = document.getElementById("main");
 
-  main.innerHTML = `<div class="container">
-    <div class="animal-name border">
-     <p>German: <br />
-     <b>${animal.germanName}</b></p>
-     <p>English: <br/>
-        ${animal.englishName}</p>
-    </div>
-    <div class="img-div">
-    </div>
-   </div>
-   <div class="container">
-    <div class="time">
-     <p id="secs">10</p>
-    </div>
-    <div>
-     <p class="list">ä = alt + 123 <br />
-                    ö = alt + 148 <br />
-                    ü = alt + 129 </p>
-    </div>
-   </div>
-    <div class="container">
-     <textarea class="field border" placeholder="Enter your text here..."></textarea>
-     <textarea id="field" class="field border"></textarea>
-    </div>
-    `;
-  const timerDOM = document.getElementById("secs");
-  startTimer(timerDOM, 10);
+  //   Schildkröte or schildkroete
+// replace string''
+
+// "Schildkröte".replace('ö', 'oe');
+
 }
 
-function createLayoutExercise(animal) {
-  const main = document.getElementById("main");
-  main.innerHTML = `<div class="container">
-        <div class="animal-name border">
-        <p>German: </p>
-        <p>English: <br/>
-            ${animal.englishName}</p>
-        </div>
-        <div class="img-div">
-        </div>
-    </div>
-    <div class="container">
-        <div class="time">
-        <p id="secs">30</p>
-        </div>
-        <div>
-        <p class="list">ä = alt + 123 <br />
-                        ö = alt + 148 <br />
-                        ü = alt + 129 </p>
-        </div>
-    </div>
-        <div class="container">
-        <textarea class="field border" placeholder="Enter your text here..."></textarea>
-        <textarea id="field" class="field border"></textarea>
-        </div>
-        `;
-  const timerDOM = document.getElementById("secs");
-  startTimer(timerDOM, 30);
-}
 
-/* first action on the page: start the timer when clicked on the Let's start link on the introduction.html file */
-//
+checkAnswer();
+
+/* display at the end how many correct answers were given of the user  */
+
+/* this function will be called inside of the layout functions */
 function startTimer(element, time) {
   const intervalId = setInterval(() => {
-    if (time <= 0) {
+    if (time <= 1) {
       clearInterval(intervalId);
-      currentLevel++;
-      createLayout(animals[currentLevel]);
+      currentLevel++;      
     }
     element.innerHTML = --time;
   }, 1000);
-}
+} // if --time -1 otherwise time-- until 0 but it starts one second later
+// change the condition from time <= 0 to time <= 1
+
+
+
+
+
+
