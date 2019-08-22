@@ -7,27 +7,33 @@
     <title>German</title>
 
     <link rel="stylesheet" href="./styles.css" />
-    <script type="module" src="./app.js"></script>
+    <!-- <script type="module" src="./app.js"></script> -->
   </head>
   <body>
-
-    <div class="container-img">
-      <div class="time"> <h3>TIMER:</h3> </div>
-      <div class="time"><h3 id="secs"></h3> </div>
-      <div id="img-div"> <img src="./" alt="image"> </div>
-   </div>
-     
-    <div id="field-container" class="container-name">
-      <div class="animal-name border"> <p>German: <br /> <b id="germanName"></b></p> </div> 
-      <div class="animal-name border"> <p>English: <br/> <span id="englishName"></span></p> </div>
+    <div class="main-div">
+      <div class="container-introduction">
+        <h1>Introduction</h1>
+        <p>
+          You will see pictures of known animals on the right side of the page. 
+          In little boxes you will see the German name including the title of this animal and 
+          the English name too. <br />
+          <br />
+          The task is to learn how to write <b>the German name including the title</b>
+          of the displayed animals during 10 seconds and remember it. <br />
+          <br />
+          After 10 seconds you have to write the German name of the animal 
+          in the textfield below the German name box. For this task you have
+          10 seconds of time. <br />
+          <br />
+          The special characters in German language you find them in the little box under 
+          the textfield where you write down your answer. <br />
+          <br />
+          <br />
+          Good luck!
+        </p>
+        <br />
+        <a id="start-btn" href="./quiz.html">Let's start</a>
+      </div>
     </div>
-    <div id="addText">
-      <input id="answer" class="field border" placeholder="Enter your answer here..." >
-      <div id="correctAnswer"></div>
-    </div>
-    <div>
-        <p class="list border">ä = alt + 123<br /> ö = alt + 148<br /> ü = alt + 129</p>
-    </div>
-
   </body>
 </html>

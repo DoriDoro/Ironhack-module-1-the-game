@@ -1,4 +1,4 @@
-/* get the elements of the index.html file*/
+/* get the elements of the quiz.html file*/
 const timerDOM = document.getElementById("secs");
 const germanName = document.getElementById('germanName');
 const englishName = document.getElementById('englishName');
@@ -73,8 +73,10 @@ const animals = [
 
 /* change the layout of the page to enter the German and English name */
 function enterNames(animal) {
-  // let correct = document.getElementById('correctAnswer');
-  // correct.innerHTML = ``; // is just working one round the second the the answer of the user is not detectable anymore
+  let emptyDiv = document.getElementById('correctAnswer');
+  emptyDiv.innerHTML = ``; 
+  emptyDiv.classList.remove('red', 'green');
+
   germanName.innerText = `${animal.germanName}`;
   englishName.innerText = `${animal.englishName}`;
   answer.setAttribute(`disabled`, true);
@@ -87,7 +89,7 @@ function enterOnlyEnglishNames(animal) {
   germanName.innerText = ``;
   englishName.innerText = `${animal.englishName}`;
   answer.focus();
-  startTimer(timerDOM, 5, checkAnswer);
+  startTimer(timerDOM, 10, checkAnswer);
 } // is working
 
 
@@ -107,15 +109,15 @@ function checkAnswer() {
    
   /* check if the answer and correct answer are the same */
     if(correctAnswer === answerOfUser) {
-      correct.innerHTML = `<div id="correctAnswer">${animals[currentLevel].germanName}, YEAH, that is correct!</div>`;
+      correct.innerHTML = `<div id="correctAnswer">${animals[currentLevel].germanName} - YEAH, that is correct!</div>`;
       //addText = document.getElementById('correctAnswer');
       correct.classList.add('green');
     } else {
-    correct.innerHTML = `<div id="correctAnswer">${answerOfUser}, NOPE, sorry folk</div>`;
+    correct.innerHTML = `<div id="correctAnswer">${answerOfUser}  - NOPE, sorry folk</div>`;
     correct.classList.add('red');
   }
   currentLevel++;
-  startTimer(timerDOM, 2, startRound);
+  startTimer(timerDOM, 5, startRound);
 }
 
 /* display at the end how many correct answers were given of the user  */
