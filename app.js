@@ -6,7 +6,7 @@ const containerField = document.getElementById('field-container');
 const answer = document.getElementById('answer');
 const imgDiv = document.getElementById('img-div');
 var currentLevel = 0;
-console.log("hello")
+
 /* array with German and English names of the animal and the pics */
 const animals = [
   {
