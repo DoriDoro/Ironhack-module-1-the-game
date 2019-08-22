@@ -89,7 +89,7 @@ function enterOnlyEnglishNames(animal) {
   germanName.innerText = ``;
   englishName.innerText = `${animal.englishName}`;
   answer.focus();
-  startTimer(timerDOM, 10, checkAnswer);
+  startTimer(timerDOM, 16, checkAnswer);
 } // is working
 
 
@@ -117,7 +117,7 @@ function checkAnswer() {
     correct.classList.add('red');
   }
   currentLevel++;
-  startTimer(timerDOM, 5, startRound);
+  startTimer(timerDOM, 6, startRound);
 }
 
 /* display at the end how many correct answers were given of the user  */
@@ -142,7 +142,7 @@ function startRound() {
   enterNames(currentAnimal);
   changeImages(currentAnimal);
 
-  startTimer(timerDOM, 10, function() {
+  startTimer(timerDOM, 11, function() {
     // console.log(`so far so good`)
     enterOnlyEnglishNames(currentAnimal);
   });
