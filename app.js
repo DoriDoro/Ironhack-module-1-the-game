@@ -1,3 +1,5 @@
+
+
 /* get the elements of the quiz.html file*/
 const timerDOM = document.getElementById("secs");
 const germanName = document.getElementById('germanName');
@@ -6,6 +8,8 @@ const containerField = document.getElementById('field-container');
 const answer = document.getElementById('answer');
 const imgDiv = document.getElementById('img-div');
 var currentLevel = 0;
+var currentScore = 0;
+
 
 /* array with German and English names of the animal and the pics */
 const animals = [
@@ -70,6 +74,12 @@ const animals = [
   }
 ];
 
+/* array for the images for the score */
+const scoreImg = [
+    "./images/wellDone.jpg",
+    "./images/congratiolation.jpg",
+    "./images/startAgain.png"
+]
 
 /* change the layout of the page to enter the German and English name */
 function enterNames(animal) {
@@ -110,45 +120,84 @@ function checkAnswer() {
   /* check if the answer and correct answer are the same */
     if(correctAnswer === answerOfUser) {
       correct.innerHTML = `<div id="correctAnswer">${animals[currentLevel].germanName} - YEAH, that is correct!</div>`;
-      //addText = document.getElementById('correctAnswer');
+      currentScore += 1;
       correct.classList.add('green');
     } else {
-    correct.innerHTML = `<div id="correctAnswer">${answerOfUser}  - NOPE, sorry folk</div>`;
-    correct.classList.add('red');
+      correct.innerHTML = `<div id="correctAnswer">${animals[currentLevel].germanName}  - NOPE, sorry folk</div>`;
+      correct.classList.add('red');
   }
   currentLevel++;
-  startTimer(timerDOM, 6, startRound);
+  startTimer(timerDOM, 6, startRound); 
 }
 
+
 /* display at the end how many correct answers were given of the user  */
+function lastPage() {
+  /* --- variables for the last page --- */
+  const germanContent = document.querySelector('#german');
+  const deleteEnglishContent = document.querySelector('#english');
+
+  /* delete the content of the German and the English p's of the website */
+  germanContent.innerText = '';
+  deleteEnglishContent.innerText = '';
+
+  /* remove the border class of the english div */
+  const deleteBorder = document.getElementById('remClass');
+  deleteBorder.classList.remove('border');
+
+  /* enter the score to the german paragraph */
+  germanContent.innerText = `You gain ${currentScore} points in this game `;
+
+  /* display the according image to the score */
+  const imgScore = document.getElementById('img-div');
+  if(currentScore <= 3 ) {
+    imgScore.querySelector("img").src = `${scoreImg[2]}`;
+  } else if (currentScore >= 4 && currentScore <= 7) {
+    imgScore.querySelector("img").src = `${scoreImg[1]}`;
+  } else imgScore.querySelector("img").src = `${scoreImg[0]}`;
+
+  /* delete the latest result out of the div */
+  let deleteCorrect = document.getElementById('correctAnswer');
+  deleteCorrect.innerHTML = '';
+
+}
 
 
 function startTimer(element, time, clbk) {
+  element.innerHTML = time;
   const intervalId = setInterval(() => {
-    if (time === 1) {
+    if (time === 0) {
       clearInterval(intervalId);
       clbk();
+      return;
     }
     element.innerHTML = --time;
   }, 1000);
-} // if --time -1 otherwise time-- until 0 but it starts one second later
-// change the condition from time <= 0 to time <= 1
+} 
+
 
 
 /* this is the first called function */
 function startRound() {
   const currentAnimal = animals[currentLevel];
   answer.value = ``;
-  enterNames(currentAnimal);
-  changeImages(currentAnimal);
 
-  startTimer(timerDOM, 11, function() {
+  /* check if the game is already at the end or if there are some animals in the array left */
+  if(currentLevel < animals.length) {
+    console.log(currentLevel, animals.length);
+    
+    enterNames(currentAnimal);
+    changeImages(currentAnimal);
+
+    startTimer(timerDOM, 10, function() {
     // console.log(`so far so good`)
     enterOnlyEnglishNames(currentAnimal);
   });
+} else lastPage();
+  
 }
 
 /* call the function to start the programm */
-startRound();
+  startRound();
 
 
