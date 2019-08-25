@@ -4,35 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>German</title>
+    <title>Challenge your brain</title>
 
     <link rel="stylesheet" href="./styles.css" />
+    <script type="module">
+      const radios = document.querySelectorAll("[name=difficulty]");
+      console.log(radios);
+      radios.forEach(r => {
+        r.oninput = function(evt) {
+          console.log(evt);
+          localStorage.setItem("difficulty", evt.target.value);
+        };
+      });
+    </script>
     <!-- <script type="module" src="./app.js"></script> -->
   </head>
   <body>
+    <img id="main-img" src="./images/backgroundpic.jpg" alt="background image">
     <div class="main-div">
       <div class="container-introduction">
         <h1>Introduction</h1>
         <p>
-          You will see pictures of known animals on the right side of the page. 
-          In little boxes you will see the German name including the title of this animal and 
-          the English name too. <br />
+          <b>Please use the full screen of your computer to make all the words visible! </b>
+          You will, depending of the level, see pictures eighter of known animals or of items.
+          In boxes you will see the German name including the title and the English name too. <br />
           <br />
-          The task is to learn how to write <b>the German name including the title</b>
-          of the displayed animals during 10 seconds and remember it. <br />
+          The task is to learn how to write <b>the German name including the title</b> of the 
+          displayed animals or items and remember it. You have a certain amount of time, visible at the 
+          timer. <br />
           <br />
-          After 10 seconds you have to write the German name of the animal 
-          in the textfield below the German name box. For this task you have
-          15 seconds of time. <br />
+          If the timer is at 0 seconds you have to write the German name in the textfield below 
+          the German name box. For this task you have again a certain amount of time. <br />
           <br />
-          The special characters in German language you find them in the little box under 
-          the textfield where you write down your answer. <br />
+          The special characters in the German language you find them in the little
+          box under the textfield where you write down your answer. <br />
           <br />
           <br />
           Good luck!
         </p>
         <br />
         <a id="start-btn" href="./quiz.html">Let's start</a>
+        <div>
+          <h2>choose level</h2>
+          <label for="easy">easy</label>
+          <input id="easy" name="difficulty" value="easy" type="radio" />
+          <label for="difficult">difficult</label>
+          <input id="difficult" name="difficulty" value="hard" type="radio" />
+        </div>
       </div>
     </div>
   </body>

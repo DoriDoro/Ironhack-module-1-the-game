@@ -166,3 +166,42 @@ function checkUmlaute() {
   // console.log(answerOfUser, typeof answerOfUser); is a string
   // console.log(correctAnswer, typeof correctAnswer); is a string
 } // is working but the condition is missing
+
+
+
+function checkAnswer() {
+  answer.setAttribute(`disabled`, true);
+  let answerOfUser = answer.value.toLowerCase(); // necessary to compare the answer of the user and the germanName in the array
+  let correctAnswer = questions[currentLevel].germanName.toLocaleLowerCase();
+  let correct = document.getElementById('correctAnswer');
+   // console.log(`why`, answerOfUser, correctAnswer);
+   
+  /* check which level the user seleted */
+  if(level === 'easy') {
+    if(correctAnswer === answerOfUser) {
+      correct.innerHTML = `<div id="correctAnswer">${questions[currentLevel].germanName} - <b> YEAH, that is correct! </b> </div>`;
+      currentScore += 1;
+      correct.classList.add('green');
+    } else {
+      correct.innerHTML = `<div id="correctAnswer">${questions[currentLevel].germanName}  - <b> NOPE, sorry folk </b> </div>`;
+      correct.classList.add('red');
+    } 
+  }else {
+      if(correctAnswer === answerOfUser) {
+        correct.innerHTML = `<div id="correctAnswer">${questions[currentLevel].germanName} - <b> YEAH, that is correct! </b> <br /> 
+        this word has ${difficultGermanWords[currentLevel].letters} letters! </div>`;
+        currentScore += 1;
+        correct.classList.add('green');
+      } else {
+        correct.innerHTML = `<div id="correctAnswer">${questions[currentLevel].germanName}  - <b> NOPE, sorry folk </b> </div>`;
+        correct.classList.add('red');
+      }
+    }
+
+  }
+
+  /* check if the answer and correct answer are the same */
+  
+  currentLevel++;
+  startTimer(timerDOM, 6, startRound); 
+
